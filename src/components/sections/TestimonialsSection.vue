@@ -4,7 +4,7 @@
       <div class="section-header">
         <h2 class="section-title">Testimonial</h2>
         <p class="section-subtitle">
-          Using basic skills you can improve your business stuff with Around
+          Trusted by Educators & Families
         </p>
       </div>
       
