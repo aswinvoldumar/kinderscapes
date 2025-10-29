@@ -19,6 +19,7 @@ import FooterSection from './components/layout/FooterSection.vue'
       <HeroSection />
     </section>
     <TrustedBySection />
+    <br>
     <section id="how-it-works">
       <HowItWorksSection />
     </section>

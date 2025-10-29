@@ -1,6 +1,6 @@
 <template>
   <section class="trusted-by">
-    <div class="container">
+    <!-- <div class="container">
       <div class="trusted-by-content">
         <div class="logo-item">LOGO IPSUM</div>
         <div class="logo-item">
@@ -22,7 +22,7 @@
           LOGO IPSUM
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
