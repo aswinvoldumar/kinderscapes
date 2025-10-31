@@ -27,7 +27,7 @@
             <li>✓ Cloud storage</li>
           </ul>
           
-          <button class="card-button">Get Start</button>
+          <button class="card-button" @click="openModal">Get Start</button>
         </div>
         
         <div class="pricing-card business">
@@ -48,7 +48,7 @@
             <li>✓ Room/timetable management</li>
           </ul>
           
-          <button class="card-button">Get Start</button>
+          <button class="card-button" @click="openModal">Get Start</button>
         </div>
         
         <div class="pricing-card premium">
@@ -69,7 +69,7 @@
             <li>✓ 24/7 support</li>
           </ul>
           
-          <button class="card-button">Get Start</button>
+          <button class="card-button" @click="openModal">Get Start</button>
         </div>
       </div>
     </div>
@@ -77,6 +77,9 @@
 </template>
 
 <script setup>
+import { inject } from 'vue'
+
+const openModal = inject('openModal')
 </script>
 
 <style scoped>

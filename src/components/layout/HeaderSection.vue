@@ -2,13 +2,13 @@
   <header class="header" :class="{ 'scrolled': isScrolled }">
     <div class="container">
       <div class="header-content">
-        <div class="logo">
+        <a href="#home" class="logo" @click.prevent="setActiveLink('home'); scrollToSection('home')">
           <img src="/src/assets/kinder logo.png" alt="Kinder Scapes Logo" class="logo-image" />
           <div class="logo-text">
             <div class="logo-title">KINDER SCAPES</div>
             <div class="logo-tagline">DAYCARE MANAGEMENT SOFTWARE</div>
           </div>
-        </div>
+        </a>
         
         <nav class="nav">
           <a href="#home" 
@@ -33,7 +33,7 @@
              @click.prevent="setActiveLink('reviews'); scrollToSection('reviews')">Reviews</a>
         </nav>
         
-        <button class="cta-button">
+        <button class="cta-button" @click="openModal">
           Start free 14 trial
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -45,7 +45,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, inject } from 'vue'
+
+const openModal = inject('openModal')
 
 const isScrolled = ref(false)
 const activeLink = ref('home')
@@ -129,6 +131,13 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.9;
 }
 
 .logo-image {

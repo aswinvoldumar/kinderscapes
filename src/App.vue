@@ -1,4 +1,5 @@
 <script setup>
+import { ref, provide } from 'vue'
 import HeaderSection from './components/layout/HeaderSection.vue'
 import HeroSection from './components/sections/HeroSection.vue'
 import TrustedBySection from './components/sections/TrustedBySection.vue'
@@ -10,6 +11,20 @@ import FeaturesSection from './components/sections/FeaturesSection.vue'
 import TestimonialsSection from './components/sections/TestimonialsSection.vue'
 import PosterModelSection from './components/sections/PosterModelSection.vue'
 import FooterSection from './components/layout/FooterSection.vue'
+import FreeTrialModal from './components/FreeTrialModal.vue'
+
+const showModal = ref(false)
+
+const openModal = () => {
+  showModal.value = true
+}
+
+const closeModal = () => {
+  showModal.value = false
+}
+
+// Provide the openModal function to all child components
+provide('openModal', openModal)
 </script>
 
 <template>
@@ -18,7 +33,7 @@ import FooterSection from './components/layout/FooterSection.vue'
     <section id="home">
       <HeroSection />
     </section>
-    <TrustedBySection />
+    <!-- <TrustedBySection /> -->
     <br>
     <section id="how-it-works">
       <HowItWorksSection />
@@ -32,11 +47,11 @@ import FooterSection from './components/layout/FooterSection.vue'
       <FeaturesSection />
     </section>
     <section id="reviews">
-      <TestimonialsSection />
+      <!-- <TestimonialsSection /> -->
     </section>
     <PosterModelSection />
     <FooterSection />
-    
+    <FreeTrialModal :isVisible="showModal" @close="closeModal" />
   </div>
 </template>
 

@@ -35,9 +35,9 @@
         
         <div class="step-card">
           <div class="step-number">4</div>
-          <h3 class="step-title">Access to Dashboard from all devices</h3>
+          <h3 class="step-title">Access to Dashboard from Responsive Web Dashboard </h3>
           <p class="step-description">
-            Using basic skills you can improve your business stuff with Around using basic tools.
+            From Basics to Brilliance: Level Up Your Business
           </p>
         </div>
       </div>
@@ -50,7 +50,8 @@
 
 <style scoped>
 .how-it-works {
-  padding: var(--section-padding);
+  margin-top: 10rem;
+  padding: 100px;
   background: var(--gray-light);
 }
 

@@ -47,47 +47,117 @@
           </ul>
         </div>
         
-        <div class="charts-container">
-          <div class="chart-card">
-            <div class="chart-visual">
-              <div class="pie-chart">
-                <div class="pie-container">
-                  <div class="pie-segment">
-                    <div class="pie-value">83%</div>
-                  </div>
-                </div>
+        <div class="table-slider-container">
+          <div class="table-slider-wrapper" :style="{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }">
+            <div class="table-card">
+              <div class="table-header">
+                <h4>Attendance Overview</h4>
               </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Present</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sofia Nasom</td>
+                    <td>Present</td>
+                    <td>✓</td>
+                  </tr>
+                  <tr>
+                    <td>Emma Wilson</td>
+                    <td>Present</td>
+                    <td>✓</td>
+                  </tr>
+                  <tr>
+                    <td>James Brown</td>
+                    <td>Absent</td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>Olivia Davis</td>
+                    <td>Present</td>
+                    <td>✓</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </div>
-          
-          <div class="chart-card">
-            <div class="chart-header">
-              <h4>Sofia Nasom</h4>
-              <span class="chart-amount">8,52k</span>
+            
+            <div class="table-card">
+              <div class="table-header">
+                <h4>Payment Status</h4>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Child</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Alex Johnson</td>
+                    <td>15 Jan</td>
+                    <td class="paid">Paid</td>
+                  </tr>
+                  <tr>
+                    <td>Mia Anderson</td>
+                    <td>15 Jan</td>
+                    <td class="pending">Pending</td>
+                  </tr>
+                  <tr>
+                    <td>Noah Taylor</td>
+                    <td>20 Jan</td>
+                    <td class="paid">Paid</td>
+                  </tr>
+                  <tr>
+                    <td>Lily Martinez</td>
+                    <td>20 Jan</td>
+                    <td class="pending">Pending</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="bar-chart">
-              <div class="bar" style="height: 60%;"></div>
-              <div class="bar" style="height: 80%;"></div>
-              <div class="bar" style="height: 45%;"></div>
-              <div class="bar" style="height: 90%;"></div>
-              <div class="bar" style="height: 70%;"></div>
-            </div>
-          </div>
-          
-          <div class="chart-card">
-            <div class="chart-header">
-              <h4>Expected Earning</h4>
-              <span class="chart-amount">$8,52k</span>
-            </div>
-            <div class="line-chart">
-              <svg viewBox="0 0 200 100">
-                <polyline
-                  fill="none"
-                  stroke="#10b981"
-                  stroke-width="3"
-                  points="0,80 30,70 60,50 90,40 120,30 150,25 180,20 200,15"
-                />
-              </svg>
+            
+            <div class="table-card">
+              <div class="table-header">
+                <h4>Activity Summary</h4>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Activity</th>
+                    <th>Count</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Art & Craft</td>
+                    <td>15</td>
+                    <td class="active">Active</td>
+                  </tr>
+                  <tr>
+                    <td>Music Class</td>
+                    <td>12</td>
+                    <td class="active">Active</td>
+                  </tr>
+                  <tr>
+                    <td>Outdoor Play</td>
+                    <td>8</td>
+                    <td class="inactive">Inactive</td>
+                  </tr>
+                  <tr>
+                    <td>Story Time</td>
+                    <td>20</td>
+                    <td class="active">Active</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -97,6 +167,25 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const currentIndex = ref(0)
+let slideInterval = null
+
+const nextSlide = () => {
+  currentIndex.value = (currentIndex.value + 1) % 3
+}
+
+onMounted(() => {
+  // Change slides every 5 seconds
+  slideInterval = setInterval(nextSlide, 5000)
+})
+
+onUnmounted(() => {
+  if (slideInterval) {
+    clearInterval(slideInterval)
+  }
+})
 </script>
 
 <style scoped>
@@ -146,112 +235,89 @@
   border-radius: 8px;
 }
 
-.charts-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+.table-slider-container {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
 }
 
-.chart-card {
+.table-slider-wrapper {
+  display: flex;
+  width: 300%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.table-card {
   background: var(--white);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  flex: 0 0 50%;
+  margin-right: 24px;
+  min-width: 0;
 }
 
-.chart-card:first-child {
-  grid-column: 1 / -1;
-}
-
-.chart-header {
+.table-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-.chart-header h4 {
+.table-header h4 {
   font-size: 1rem;
   font-weight: 600;
   color: var(--primary-dark-blue);
 }
 
-.chart-amount {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--primary-light-blue);
-}
-
-.pie-chart {
+.data-table {
   width: 100%;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-collapse: collapse;
 }
 
-.pie-container {
-  width: 180px;
-  height: 180px;
-  position: relative;
-  border-radius: 50%;
-  background: conic-gradient(
-    var(--primary-light-blue) 0deg 298.8deg,
-    #e5e7eb 298.8deg 360deg
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.data-table thead {
+  border-bottom: 2px solid #e5e7eb;
 }
 
-.pie-segment {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  position: relative;
-}
-
-.pie-value {
-  font-size: 1.5rem;
-  font-weight: 800;
+.data-table th {
+  text-align: left;
+  padding: 12px 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: var(--primary-dark-blue);
-  z-index: 2;
-  position: relative;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 8px 12px;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.bar-chart {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  height: 150px;
+.data-table td {
+  padding: 12px 8px;
+  font-size: 0.95rem;
+  color: var(--gray-dark);
+  border-bottom: 1px solid #f3f4f6;
 }
 
-.bar {
-  flex: 1;
-  background: var(--accent-yellow);
-  border-radius: 4px 4px 0 0;
-  transition: opacity 0.3s ease;
+.data-table tbody tr:hover {
+  background-color: #f8fafc;
 }
 
-.bar:hover {
-  opacity: 0.8;
+.data-table td.paid {
+  color: var(--accent-green);
+  font-weight: 600;
 }
 
-.line-chart {
-  height: 150px;
-  width: 100%;
+.data-table td.pending {
+  color: var(--accent-orange);
+  font-weight: 600;
 }
 
-.line-chart svg {
-  width: 100%;
-  height: 100%;
+.data-table td.active {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.data-table td.inactive {
+  color: var(--gray);
+  font-weight: 600;
 }
 
 @media (max-width: 1024px) {
@@ -259,18 +325,28 @@
     grid-template-columns: 1fr;
   }
   
-  .charts-container {
+  .table-slider-container {
     order: 1;
   }
   
   .analyze-text {
     order: 2;
   }
+  
+  .table-card {
+    flex: 0 0 50%;
+  }
 }
 
 @media (max-width: 768px) {
-  .charts-container {
-    grid-template-columns: 1fr;
+  .table-card {
+    flex: 0 0 100%;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 8px 4px;
+    font-size: 0.875rem;
   }
 }
 </style>

@@ -33,7 +33,7 @@
           <h1 class="hero-title">Manage your Day Care with easy and joy</h1>
           <div class="hero-input-group">
             <input type="email" placeholder="Input your mail..." class="hero-input" />
-            <button class="btn-secondary">
+            <button class="btn-secondary" @click="openModal">
               Try for Free
             </button>
           </div>
@@ -48,6 +48,9 @@
 </template>
 
 <script setup>
+import { inject } from 'vue'
+
+const openModal = inject('openModal')
 </script>
 
 <style scoped>

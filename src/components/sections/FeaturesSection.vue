@@ -24,7 +24,7 @@
             </li>
           </ul>
           
-          <button class="btn-primary">
+          <button class="btn-primary" @click="openModal">
             Get a demo
           </button>
         </div>
@@ -38,6 +38,9 @@
 </template>
 
 <script setup>
+import { inject } from 'vue'
+
+const openModal = inject('openModal')
 </script>
 
 <style scoped>

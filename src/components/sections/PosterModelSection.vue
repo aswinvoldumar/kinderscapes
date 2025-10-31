@@ -6,7 +6,7 @@
         <div class="marketing-panel">
           <h2 class="marketing-title">The best day care<br>management in<br>your fingertips.</h2>
           <p class="marketing-subtitle">Made with love to make every daycare day<br>easier.</p>
-          <button class="cta-button">
+          <button class="cta-button" @click="openModal">
             Start free 14 trial
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -24,6 +24,9 @@
 </template>
 
 <script setup>
+import { inject } from 'vue'
+
+const openModal = inject('openModal')
 </script>
 
 <style scoped>
